@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Ajuste opcional para ocultar barras de scroll estéticas */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -16,7 +15,7 @@
 
     <div id="navbar-container"></div>
 
-    <div class="flex flex-1 overflow-hidden h-[calc(100vh-64px)]">
+    <div data-tabs-group class="flex flex-1 overflow-hidden h-[calc(100vh-64px)]">
         
         <aside class="w-full md:w-[450px] bg-white border-r border-slate-200 flex flex-col h-full shadow-sm">
             
@@ -29,20 +28,20 @@
             </div>
 
             <div class="flex border-b border-slate-200 bg-white text-sm">
-                <button onclick="cambiarPestaña('resumen')" id="btn-resumen" class="flex-1 py-3 text-center font-semibold border-b-2 border-blue-600 text-blue-600 transition-all">
+                <button data-tab-target="resumen" class="flex-1 py-3 text-center font-semibold border-b-2 border-blue-600 text-blue-600 transition-all">
                     <i class="fa-solid fa-list-check mr-1"></i> Resumen
                 </button>
-                <button onclick="cambiarPestaña('diapositivas')" id="btn-diapositivas" class="flex-1 py-3 text-center font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+                <button data-tab-target="diapositivas" class="flex-1 py-3 text-center font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
                     <i class="fa-solid fa-desktop mr-1"></i> Diapositivas
                 </button>
-                <button onclick="cambiarPestaña('objetivos')" id="btn-objetivos" class="flex-1 py-3 text-center font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+                <button data-tab-target="objetivos" class="flex-1 py-3 text-center font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
                     <i class="fa-solid fa-bullseye mr-1"></i> Datos Clave
                 </button>
             </div>
 
             <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
                 
-                <div id="panel-resumen" class="tab-panel block space-y-4">
+                <div data-tab-panel="resumen" class="space-y-4">
                     <h3 class="text-base font-bold text-slate-900">Enfoque Central</h3>
                     <p class="text-sm text-slate-600 leading-relaxed">
                         Este módulo se centra en blindar la administración pública invirtiendo el camino crítico tradicional. Implementa herramientas tecnológicas avanzadas para hacer que la corrupción sea técnicamente inviable.
@@ -57,27 +56,42 @@
                     </div>
                 </div>
 
-                <div id="panel-diapositivas" class="tab-panel hidden space-y-4">
+                <div data-tab-panel="diapositivas" class="hidden space-y-4">
                     <h3 class="text-base font-bold text-slate-900">Presentación Ejecutiva</h3>
                     
                     <div class="bg-slate-900 text-white rounded-xl p-6 min-h-[200px] flex flex-col justify-between relative shadow-inner">
-                        <div id="slide-contenido" class="space-y-2">
-                            </div>
+                        <div id="slide-contenido" class="space-y-2"></div>
+                        
                         <div class="flex justify-between items-center mt-6 pt-3 border-t border-slate-800 text-xs">
-                            <span id="slide-contador" class="text-slate-400 font-medium">Diapositiva 1 de 3</span>
+                            <span id="slide-contador" class="text-slate-400 font-medium">Cargando...</span>
                             <div class="flex gap-2">
-                                <button onclick="navegarSlide(-1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors">
+                                <button onclick="window.miCarrusel.navegar(-1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors">
                                     <i class="fa-solid fa-chevron-left"></i>
                                 </button>
-                                <button onclick="navegarSlide(1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors">
+                                <button onclick="window.miCarrusel.navegar(1)" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-colors">
                                     <i class="fa-solid fa-chevron-right"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
+
+                    <div id="fuente-diapositivas" class="hidden">
+                        <div class="slide-item">
+                            <h4>Despliegue del RENT</h4>
+                            <p>Monitoreo automatizado del ecosistema educativo nacional para asegurar auditorías de procesos eficaces y transparentes.</p>
+                        </div>
+                        <div class="slide-item">
+                            <h4>Fiscalización por IA</h4>
+                            <p>Algoritmos entrenados para auditar en tiempo real el 100% de la contratación pública y los flujos financieros sin intervención humana.</p>
+                        </div>
+                        <div class="slide-item">
+                            <h4>El Cerco Reputacional</h4>
+                            <p>Alertas públicas inmediatas ante anomalías detectadas, bloqueando el músculo financiero de contratistas corruptos bajo presión social.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="panel-objetivos" class="tab-panel hidden space-y-4">
+                <div data-tab-panel="objetivos" class="hidden space-y-4">
                     <h3 class="text-base font-bold text-slate-900">Hoja de Ruta del Módulo</h3>
                     <p class="text-sm text-slate-600">Reordenamiento estratégico para mitigar la fricción política institucional:</p>
                     
@@ -85,7 +99,7 @@
                         <div class="relative">
                             <div class="absolute -left-[25px] top-1 w-3 h-3 bg-emerald-500 rounded-full ring-4 ring-white"></div>
                             <h4 class="text-sm font-bold text-slate-900">Fase de Incubación (Años 1-2)</h4>
-                            <p class="text-xs text-slate-600 mt-0.5">Enfoque en iniciativas cívicas de baja fricción (Arte, Cultura e Innovación Creativa) para consolidar apoyo social masivo.</p>
+                            <p class="text-xs text-slate-600 mt-0.5">Enfoque en initiatives cívicas de baja fricción (Arte, Cultura e Innovación Creativa) para consolidar apoyo social masivo.</p>
                         </div>
                         <div class="relative">
                             <div class="absolute -left-[25px] top-1 w-3 h-3 bg-blue-500 rounded-full ring-4 ring-white"></div>
@@ -116,58 +130,7 @@
 
     </div>
 
-    <script src="js/global.js"></script>
+    <script type="module" src="js/global.js"></script>
 
-    <script>
-        // 1. Manejo del Cambio de Pestañas Izquierdas
-        function cambiarPestaña(tabId) {
-            // Ocultar todos los paneles
-            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
-            
-            // Quitar estilos activos a todos los botones
-            const botones = ['resumen', 'diapositivas', 'objetivos'];
-            botones.forEach(b => {
-                const btn = document.getElementById(`btn-${b}`);
-                btn.classList.remove('border-blue-600', 'text-blue-600');
-                btn.classList.add('border-transparent', 'text-slate-500');
-            });
-
-            // Mostrar panel seleccionado y activar botón
-            document.getElementById(`panel-${tabId}`).classList.remove('hidden');
-            const btnActivo = document.getElementById(`btn-${tabId}`);
-            btnActivo.classList.remove('border-transparent', 'text-slate-500');
-            btnActivo.classList.add('border-blue-600', 'text-blue-600');
-        }
-
-        // 2. Lógica del Mini Carrusel de Diapositivas
-        const slides = [
-            { titulo: "Despliegue del RENT", desc: "Monitoreo automatizado del ecosistema educativo nacional para asegurar auditorías de procesos eficaces y transparentes." },
-            { titulo: "Fiscalización por IA", desc: "Algoritmos entrenados para auditar en tiempo real el 100% de la contratación pública y los flujos financieros sin intervención humana." },
-            { titulo: "El Cerco Reputacional", desc: "Alertas públicas inmediatas ante anomalías detectadas, bloqueando el músculo financiero de contratistas corruptos bajo presión social." }
-        ];
-        
-        let currentSlide = 0;
-
-        function renderSlide() {
-            const container = document.getElementById('slide-contenido');
-            const contador = document.getElementById('slide-contador');
-            
-            container.innerHTML = `
-                <h4 class="text-sm font-bold text-blue-400 uppercase tracking-wider"><i class="fa-solid fa-circle-dot text-xs mr-2"></i>${slides[currentSlide].titulo}</h4>
-                <p class="text-sm text-slate-300 leading-relaxed mt-2">${slides[currentSlide].desc}</p>
-            `;
-            contador.innerText = `Diapositiva ${currentSlide + 1} de ${slides.length}`;
-        }
-
-        function navegarSlide(direccion) {
-            currentSlide += direccion;
-            if (currentSlide < 0) currentSlide = slides.length - 1;
-            if (currentSlide >= slides.length) currentSlide = 0;
-            renderSlide();
-        }
-
-        // Inicializar el primer slide al cargar
-        renderSlide();
-    </script>
 </body>
 </html>

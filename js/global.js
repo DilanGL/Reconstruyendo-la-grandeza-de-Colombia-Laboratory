@@ -1,6 +1,8 @@
 import { cargarNavbar, cargarModulosRepositorio, openTab } from './modules/ui.js';
 import { initHeroMedia, switchMedia } from './modules/hero.js';
 import { selectSurvey, renderizarPendientes } from './modules/participacion.js';
+// Importamos las utilidades generales de los módulos
+import { initTabsGenericas, ModuloCarousel } from './modules/modulos-manager.js';
 
 // --- VINCULACIÓN AL WINDOW PARA COMPATIBILIDAD CON ATRIBUTOS ONCLICK INLINE ---
 window.openTab = openTab;
@@ -13,6 +15,13 @@ window.addEventListener('load', () => {
     initHeroMedia();
     renderizarPendientes();
     cargarModulosRepositorio();
+
+    // 🌟 INICIALIZACIÓN AUTOMÁTICA DE COMPONENTES DE MÓDULOS
+    initTabsGenericas();
+
+    if (document.getElementById('fuente-diapositivas')) {
+        window.miCarrusel = new ModuloCarousel('fuente-diapositivas', 'slide-contenido', 'slide-contador');
+    }
 
     document.body.classList.add("pt-24");
 
