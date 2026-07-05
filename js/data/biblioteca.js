@@ -99,7 +99,7 @@ export const modulosRepositorio = [
         colorBadge: "bg-emerald-100 text-emerald-800",
         colorIcono: "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600",
         colorBoton: "text-emerald-600 hover:text-emerald-700",
-        enlaceHtml: "modulo2-3.html"
+        enlaceHtml: "../modulos/modulo2-3.html"
     },
     {
         modulo: "Módulo 2.4",
